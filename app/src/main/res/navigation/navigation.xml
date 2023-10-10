@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/welcomeFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.foodorderapp.ui.fragment.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/toDetail"
+            app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/toFavoriteFragment"
+            app:destination="@id/favoriteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.foodorderapp.ui.fragment.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="foods"
+            app:argType="com.example.foodorderapp.data.entity.Foods" />
+        <action
+            android:id="@+id/toCart"
+            app:destination="@id/cartFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.example.foodorderapp.ui.fragment.CartFragment"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart" >
+        <action
+            android:id="@+id/backToMain"
+            app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/goToCheckOut"
+            app:destination="@id/checkOutFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="com.example.foodorderapp.ui.fragment.WelcomeFragment"
+        android:label="WelcomeFragment" >
+        <action
+            android:id="@+id/toMain"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.example.foodorderapp.ui.fragment.FavoriteFragment"
+        android:label="FavoriteFragment" />
+    <fragment
+        android:id="@+id/checkOutFragment"
+        android:name="com.example.foodorderapp.ui.fragment.CheckOutFragment"
+        android:label="CheckOutFragment" >
+        <action
+            android:id="@+id/backToHome"
+            app:destination="@id/mainFragment" />
+    </fragment>
+</navigation>

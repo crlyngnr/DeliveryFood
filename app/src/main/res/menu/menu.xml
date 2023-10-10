@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:id="@+id/mainFragment"
+    android:title="@string/home"
+    android:icon="@drawable/ic_home_24"/>
+    <item android:id="@+id/action_disabled"
+        android:enabled="false"
+        android:title="" />
+    <item android:icon="@drawable/ic_favorite_border_24"
+        android:title="@string/favorites"
+        android:id="@+id/favoriteFragment"/>
+</menu>

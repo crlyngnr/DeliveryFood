@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="ItemEntityDataBindingVariable"
+            type="com.example.foodorderapp.data.entity.Foods" />
+        <variable
+            name="foodsItemCart"
+            type="com.example.foodorderapp.data.entity.CartFood" />
+        <variable
+            name="itemDetailsFragmentDataBindingVariable"
+            type="com.example.foodorderapp.ui.fragment.DetailFragment" />
+        <variable name="itemQuantityDataBindingVariable"
+            type="String"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.fragment.DetailFragment">
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@drawable/background"
+            tools:ignore="MissingConstraints" />
+
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imageFilm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/view" />
+
+        <TextView
+            android:id="@+id/textViewFiyat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="50dp"
+            android:text='@{ItemEntityDataBindingVariable.itemPrice + " ₺"}'
+            android:textColor="@color/textColor2"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewFoodName" />
+
+        <TextView
+            android:id="@+id/textViewFoodName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text='@{ItemEntityDataBindingVariable.itemName}'
+            android:textStyle="bold"
+            android:textColor="@color/textColor2"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageFilm" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/yemek_hakkinda"
+            android:textColor="@color/textColor2"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textView4"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/lorem_ipsum"
+            android:textColor="@color/textColor2"
+            app:layout_constraintBottom_toTopOf="@+id/btnAddCart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btnAddCart"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/btn_add_cart"
+            android:text="@string/add_cart"
+            android:textColor="@color/textColor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <RatingBar
+            android:id="@+id/ratingBar2"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="18dp"
+            android:numStars="5"
+            android:progressTint="@color/appColor"
+            android:rating="4.5"
+            android:stepSize="0.1"
+            app:layout_constraintStart_toEndOf="@+id/textView5"
+            app:layout_constraintTop_toBottomOf="@+id/textViewFoodName" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="4.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewFoodName" />
+
+        <ImageButton
+            android:id="@+id/imageBtnInc"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/btn_circle"
+            android:onClick="@{() -> itemDetailsFragmentDataBindingVariable.buttonIncrementClick(textViewOrder.getText().toString())}"
+            app:layout_constraintTop_toBottomOf="@+id/textView5"
+            app:srcCompat="@drawable/ic_add"
+            app:tint="@color/textColor" />
+
+        <ImageButton
+            android:id="@+id/imageBtnDec"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/btn_circle_2"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="60dp"
+            android:onClick="@{() -> itemDetailsFragmentDataBindingVariable.buttonDecrementClick(textViewOrder.getText().toString())}"
+            app:layout_constraintEnd_toStartOf="@+id/imageBtnInc"
+            app:layout_constraintTop_toBottomOf="@+id/textView5"
+            app:srcCompat="@drawable/ic_remove_24" />
+
+        <TextView
+            android:id="@+id/textViewOrder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@{itemQuantityDataBindingVariable}"
+            android:textSize="24sp"
+            android:textColor="@color/appColor"
+            app:layout_constraintEnd_toStartOf="@+id/imageBtnInc"
+            app:layout_constraintStart_toEndOf="@+id/imageBtnDec"
+            app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+        <ImageButton
+            android:id="@+id/imageBtnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick="@{()-> itemDetailsFragmentDataBindingVariable.backToMain()}"
+            android:backgroundTint="@android:color/transparent"
+            app:srcCompat="@drawable/ic_back_24" />
+
+        <ImageButton
+            android:id="@+id/imgBtnCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:onClick="@{()-> itemDetailsFragmentDataBindingVariable.goToCart()}"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:backgroundTint="@android:color/transparent"
+            app:srcCompat="@drawable/ic_shopping_basket_24" />
+
+        <TextView
+            android:id="@+id/textViewToplamFiyat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="20dp"
+            android:text="@{String.format(`Toplam fiyat : %s₺`, ItemEntityDataBindingVariable.itemPrice * Integer.parseInt(itemQuantityDataBindingVariable))}"
+            android:textColor="@color/textColor2"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
