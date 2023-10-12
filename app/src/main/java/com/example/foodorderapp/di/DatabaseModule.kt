@@ -32,8 +32,8 @@ class DatabaseModule {
     @Provides
     @Singleton
     fun provideFavoritesDao(@ApplicationContext context: Context) : FavoritesDao {
-        val vt = Room.databaseBuilder(context, FavoriteDatabase::class.java,"food_favorites.sqlite")
-            .createFromAsset("food_favorites.sqlite").build()
+        val vt = Room.databaseBuilder(context, FavoriteDatabase::class.java,"favorites.sqlite")
+            .createFromAsset("favorites.sqlite").build()
         return vt.getFavoritesDao()
     }
 }

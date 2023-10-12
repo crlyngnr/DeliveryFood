@@ -24,7 +24,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
-            app:lottie_fileName="gif.json">
+            app:lottie_fileName="night.json">
         </com.airbnb.lottie.LottieAnimationView>
 
         <TextView
@@ -36,7 +36,7 @@
             android:textAlignment="center"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:textColor="@color/textColor2"
+            android:textColor="@color/appColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

@@ -10,6 +10,7 @@ import androidx.navigation.Navigation
 import com.example.foodorderapp.R
 import com.example.foodorderapp.databinding.FragmentCheckOutBinding
 import com.example.foodorderapp.databinding.FragmentWelcomeBinding
+import com.example.foodorderapp.utils.goTo
 
 class CheckOutFragment : Fragment() {
     private lateinit var binding: FragmentCheckOutBinding
@@ -21,6 +22,10 @@ class CheckOutFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_check_out, container, false)
         binding.imageButtonBack.setOnClickListener {
+            val action = CheckOutFragmentDirections.backToHome()
+            Navigation.findNavController(it).navigate(action)
+        }
+        binding.btnBackToMainPage?.setOnClickListener{
             val action = CheckOutFragmentDirections.backToHome()
             Navigation.findNavController(it).navigate(action)
         }

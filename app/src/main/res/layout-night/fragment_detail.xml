@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginBottom="16dp"
-            android:text="@string/yemek_hakkinda"
+            android:text="@string/about_food"
             android:textColor="@color/textColor2"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -125,7 +125,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="4.5"
+            android:text="@string/_4_5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewFoodName" />
 

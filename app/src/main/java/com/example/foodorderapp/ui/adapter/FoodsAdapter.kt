@@ -17,7 +17,6 @@ import com.google.android.material.snackbar.Snackbar
 
 class FoodsAdapter(var mContext:Context, var foodsList : List<Foods>,var mainViewModel: MainViewModel)
     : RecyclerView.Adapter<FoodsAdapter.FoodsViewHolder>(){
-    private val favoriteSet = mutableSetOf<Int>() // Favori yemeklerin id'lerini içeren küme
 
     inner class FoodsViewHolder(var foodItemBinding: FoodItemBinding) : RecyclerView.ViewHolder(foodItemBinding.root)
 
@@ -34,16 +33,30 @@ class FoodsAdapter(var mContext:Context, var foodsList : List<Foods>,var mainVie
         Glide.with(mContext).load(url).override(500,750).into(f.imageViewFood)
         f.foodsItem = foods
         f.imageAddCart.setOnClickListener {
-                     val transaction = MainFragmentDirections.toDetail(foods = foods)
+            val transaction = MainFragmentDirections.toDetail(foods = foods)
             Navigation.findNavController(it).navigate(transaction)
         }
         f.cardFoods.setOnClickListener {
             val transaction = MainFragmentDirections.toDetail(foods = foods)
             Navigation.findNavController(it).navigate(transaction)
         }
-        f.imageView3.setOnClickListener {
-            addFavorites(foods.itemId,foods.itemName,foods.itemPicture,foods.ItemPrice)
+        if (isItemInFavorites(foods.itemId)) {
+            f.imageView3.setImageResource(R.drawable.ic_favorite_red_24)
+        } else {
+            f.imageView3.setImageResource(R.drawable.ic_avorite)
         }
+        f.imageView3.setOnClickListener {
+            val item = foodsList[position]
+            val imageView = f.imageView3
+            if (isItemInFavorites(item.itemId)) {
+                deleteFavorites(item.itemId, item.ItemPrice)
+                imageView.setImageResource(R.drawable.ic_avorite)
+            } else {
+                addFavorites(item.itemId, item.itemName, item.itemPicture, item.ItemPrice)
+                imageView.setImageResource(R.drawable.ic_favorite_red_24)
+            }
+        }
+
     }
 
     override fun getItemCount(): Int { return  foodsList.size}
@@ -54,5 +67,11 @@ class FoodsAdapter(var mContext:Context, var foodsList : List<Foods>,var mainVie
     fun addFavorites(item_id:Int ,item_name: String,item_picture:String,item_price:Int){
         mainViewModel.addFavorites(item_id,item_name,item_picture,item_price)
     }
-
+    fun deleteFavorites(item_id: Int, item_price: Int){
+        mainViewModel.deleteFavorites(item_id,item_price)
     }
+    private fun isItemInFavorites(itemId: Int): Boolean {
+        val favoriteItems = mainViewModel.favoriteItems.value
+        return favoriteItems?.any { it.item_id == itemId } == true
+    }
+}

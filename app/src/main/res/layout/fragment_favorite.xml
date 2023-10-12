@@ -28,7 +28,7 @@
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
             android:textAlignment="center"
-            app:titleTextColor="@color/black"
+            app:titleTextColor="@color/appColor"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="1dp" />
 

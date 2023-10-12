@@ -1,11 +1,13 @@
 package com.example.foodorderapp.ui.fragment
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -26,10 +28,8 @@ class CartFragment : Fragment() {
     private lateinit var viewModel: CartViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_cart,container,false)
         binding.cartFragment=this
-
         viewModel.cartFoodList.observe(viewLifecycleOwner){
             val cartFoodAdapter = it?.let{it -> CartFoodAdapter(requireContext(),it,viewModel)}
             binding.cartFoodAdapter = cartFoodAdapter
@@ -37,6 +37,8 @@ class CartFragment : Fragment() {
         viewModel.totalOrderPrice.observe(viewLifecycleOwner){
                 totalPrice -> binding.textViewTotalCost.text = "Order Price: ${totalPrice}₺"
         }
+
+
         return binding.root
     }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,21 +50,29 @@ class CartFragment : Fragment() {
         super.onResume()
         viewModel.loadCart()
     }
-
-    override fun onStart() {
-        super.onStart()
-        viewModel.loadCart()
-    }
-    fun orderConfirmation(view:View){
-        Log.e("Checkout", "OrderConfirmed")
-        Snackbar.make(view, "Order confirmed. Thank you!", Snackbar.LENGTH_LONG).show()
-        goToCheckOrder()
+    fun orderConfirmation(view: View) {
+        if ((viewModel.totalOrderPrice.value ?: 0) > 0) {
+            Snackbar.make(view, R.string.order_confirmed, Snackbar.LENGTH_LONG)
+                .setBackgroundTint(ContextCompat.getColor(requireContext(),R.color.appColor))
+                .setTextColor(Color.WHITE).show()
+            goToCheckOrder()
+            removeAllItemsFromCart()
+        } else {
+            Snackbar.make(view, R.string.empty_cart, Snackbar.LENGTH_LONG)
+                .setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.appColor))
+                .setTextColor(Color.WHITE).show()
+        }
     }
     fun backToMain() {
         findNavController().navigate(R.id.backToMain)
     }
-    fun goToCheckOrder(){
+    private fun goToCheckOrder(){
         findNavController().navigate(R.id.goToCheckOut)
+    }
+    private fun removeAllItemsFromCart() {
+        viewModel.cartFoodList.value?.forEach { cartItem ->
+            viewModel.removeFromCart(cartItem.cartItemId, cartItem.username)
+        }
     }
 
 }

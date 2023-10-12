@@ -24,9 +24,9 @@ class FavoriteViewModel @Inject constructor(var favoritesRepository: FavoritesRe
             favoriteList.value = favoritesRepository.loadFavoriteFood()
         }
     }
-    fun deleteFavorites(id:Int,item_id:Int,item_price:Int){
+    fun deleteFavorites(item_id:Int,item_price:Int){
         CoroutineScope(Dispatchers.Main).launch {
-            favoritesRepository.deleteFavorites(id,item_id,item_price)
+            favoritesRepository.deleteFavorites(item_id,item_price)
             loadFavoriteFood()
         }
     }

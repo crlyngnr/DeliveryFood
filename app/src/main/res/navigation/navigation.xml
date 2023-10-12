@@ -16,6 +16,9 @@
         <action
             android:id="@+id/toFavoriteFragment"
             app:destination="@id/favoriteFragment" />
+        <action
+            android:id="@+id/to_cartFragment"
+            app:destination="@id/cartFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"

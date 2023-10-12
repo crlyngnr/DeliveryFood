@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 <item android:id="@+id/mainFragment"
     android:title="@string/home"
+    app:showAsAction="ifRoom"
     android:icon="@drawable/ic_home_24"/>
-    <item android:id="@+id/action_disabled"
-        android:enabled="false"
-        android:title="" />
-    <item android:icon="@drawable/ic_favorite_border_24"
+    <item android:icon="@drawable/ic_avorite"
         android:title="@string/favorites"
+        app:showAsAction="always"
         android:id="@+id/favoriteFragment"/>
+    <item android:id="@+id/cartFragment"
+        android:title="@string/my_cart"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_shopping_cart_24"/>
+
 </menu>

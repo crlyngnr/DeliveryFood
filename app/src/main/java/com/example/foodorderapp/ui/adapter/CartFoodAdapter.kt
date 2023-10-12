@@ -1,8 +1,10 @@
 package com.example.foodorderapp.ui.adapter
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
@@ -32,7 +34,9 @@ class CartFoodAdapter(var mContext : Context, var cartFoodList : List<CartFood>,
         Glide.with(mContext).load(url).override(100,100).into(c.imageView2)
 
         c.imageBtnDelete.setOnClickListener {
-            Snackbar.make(it,"${cartFoods.cartItemName} removed from cart.", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(it,"${cartFoods.cartItemName} removed from cart.", Snackbar.LENGTH_SHORT).setBackgroundTint(
+                ContextCompat.getColor(mContext, R.color.appColor))
+                .setTextColor(Color.WHITE).show()
             removeFromCart(cartFoods.cartItemId,cartFoods.username)
         }
 

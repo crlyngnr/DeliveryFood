@@ -1,11 +1,13 @@
 package com.example.foodorderapp.ui.fragment
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -16,6 +18,9 @@ import com.example.foodorderapp.databinding.FragmentDetailBinding
 import com.example.foodorderapp.ui.viewmodel.DetailViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
@@ -39,9 +44,15 @@ class DetailFragment : Fragment() {
         Glide.with(this).load(url).override(600, 850).into(binding.imageFilm)
         binding.btnAddCart.setOnClickListener {
             if(binding.itemQuantityDataBindingVariable.toString().toInt()==1){
-                Snackbar.make(it, "${binding.itemQuantityDataBindingVariable.toString()} piece of ${foods.itemName} added to cart.", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(it, "${binding.itemQuantityDataBindingVariable.toString()} piece of ${foods.itemName} added to cart.", Snackbar.LENGTH_SHORT)
+                    .setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.appColor))
+                    .setTextColor(Color.WHITE)
+                    .show()
             } else {
-                Snackbar.make(it, "${binding.itemQuantityDataBindingVariable.toString()} pieces of ${foods.itemName} added to cart.", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(it, "${binding.itemQuantityDataBindingVariable.toString()} pieces of ${foods.itemName} added to cart.", Snackbar.LENGTH_SHORT)
+                    .setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.appColor))
+                    .setTextColor(Color.WHITE)
+                    .show()
             }
             addToCart(foods.itemId,foods.itemName,foods.itemPicture,foods.ItemPrice,binding.itemQuantityDataBindingVariable.toString())
             backToMain()
@@ -74,19 +85,4 @@ class DetailFragment : Fragment() {
     fun buttonDecrementClick(currentQuantity:String){
         viewModel.buttonDecrementClick(currentQuantity)
     }
-
 }
-
-/*
-    fun incOrder() {
-        orderNum += 1
-        binding.number = orderNum
-    }
-
-    fun decOrder() {
-        if (orderNum - 1 > 0) {
-            orderNum -= 1
-            binding.number = orderNum
-        }
-    }
- */
